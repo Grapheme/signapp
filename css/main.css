@@ -393,10 +393,15 @@ body > .holder {
     padding-top: 230px;
 }
 
+.steps .step-6 .email-form button img {
+    width: 100%;
+}
+
 .steps .step-6 .email-form button {
     background: none;
     border: none;
     padding: 0;
+    width: 300px;
 }
 
 .steps .step-6 .title {
@@ -472,6 +477,10 @@ body > .holder {
     /*-webkit-overflow-scrolling: touch;*/
 }
 
+.steps .step-5 .send-btn img {
+    width: 374px;
+}
+
 .steps .step-5 .text {
     font-family: "garamond";
     font-size: 21px;
@@ -527,6 +536,15 @@ body > .holder {
     left: 1px;
 }
 
+.steps .step-3 .scan-btn img{
+    width: 100%;
+}
+
+.steps .step-3 .scan-btn {
+    width: 300px;
+    display: inline-block;
+}
+
 .steps .step-3 .container {
     width: 708px;
     height: 209px;
@@ -564,6 +582,10 @@ body > .holder {
     position: absolute;
     text-align: center;
     top: 150px;
+}
+
+.steps .step-1 .start img{
+    width: 80%;
 }
 
 .steps .step-1 {

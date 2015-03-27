@@ -1,3 +1,7 @@
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 var signImage = new Image();
 
 window.signature = {
@@ -41,99 +45,8 @@ $(document).ready(function(){
   }
   firstSlide(3);
   
-  var chooseNextStep = function(prevX, prevY, curX, curY, direction) {
-      var isX = curX - prevX;
-      var isY = curY - prevY;
-      var stepX;
-      var stepY;
-      if(direction > 0){
-          direction = 1;
-      }else{
-          direction = -1;
-      }
-
-      if(isX === 0 && isY === 1) {
-          stepX = -1*direction;
-          stepY = 0;
-      }
-      if(isX === 0 && isY === -1 ) {
-          stepX = 1*direction;
-          stepY = 0;
-      }
-      if(isX === 1 && isY === 0){
-          stepX = 0;
-          stepY = 1*direction;
-      }
-      if(isX === -1 && isY === 0){
-          stepX = 0;
-          stepY = -1*direction;
-      }
-
-      var nextX = curX + stepX;
-      var nextY = curY + stepY;
-      return [nextX,nextY];
-  }
   
-  var findBoundaryPixel = function(image){
-    var prev, cur;
-    var prevX, prevY;
-    for(var i = 0; i < image.length; i++){
-        for(var j = 0; j< image[i].length; j++){
-            cur = image[i][j];
-            if(cur === 1 && prev === 0){
-                return {
-                    white:[prevX, prevY],
-                    black:[i,j]
-                }
-            }
-            prev = cur;
-            prevX = i;
-            prevY = j;
-        }
-    }
-  }
   
-  var findShape = function(data) {
-    var shape=[];
-    var image = data;
-
-
-    var boundaryPixel = findBoundaryPixel(image);
-    if (!boundaryPixel) {
-        return null;
-    }
-    var startX = boundaryPixel.white[0];
-    var startY = boundaryPixel.white[1];
-
-    var prevX = startX;
-    var prevY = startY;
-    var curX = boundaryPixel.black[0];
-    var curY = boundaryPixel.black[1];
-    var iterates = 0;
-
-    while (true){
-        if(image[curX] && image[curX][curY] === 1) {
-            shape.push([curX,curY]);
-            image[curX][curY]+=1;
-        }
-
-        var nexts = chooseNextStep(prevX,prevY,curX,curY,image[curX] ? image[curX][curY] || 0 : 0);
-        prevX = curX;
-        prevY = curY;
-        curX = nexts[0];
-        curY = nexts[1];
-
-        if(curX === startX && curY === startY){
-            break;
-        }
-        iterates++;
-        if (iterates > 5000) {
-            return null;
-        }
-    }
-    //return createTouchRect(shape);
-    return shape;
-  }
   
   function createImage(binArray, w, h) { //создаёт изображения из одномерного монохромного массива
     var _canvas=document.createElement("canvas");
@@ -189,6 +102,160 @@ $(document).ready(function(){
     return arrayImage;
   }
   
+  function prepare(twoDimArray) {
+    var total = 0;
+    for (y = 0; y < twoDimArray.length; y += 1) {
+      for (x = 0; x < twoDimArray[y].length; x += 1) {
+        var _c = 0;
+        if (twoDimArray[y][x]==1) {
+          try{
+            if (twoDimArray[y-1][x]==1) {
+              _c++
+            }
+          } catch(e) {
+            
+          }
+          
+          try{
+            if (twoDimArray[y+1][x]==1) {
+              _c++
+            }
+          } catch(e) {
+            
+          }
+          try{
+            if (twoDimArray[y][x+1]==1) {
+              _c++
+            }
+          } catch(e) {
+            
+          }
+          try{
+            if (twoDimArray[y][x-1]==1) {
+              _c++
+            }
+          } catch(e) {
+            
+          }
+        }
+        //console.log(_c);
+        if (_c==1) {
+          //console.log('fix!');
+          total++
+          twoDimArray[y][x]=0;
+        }
+      }
+    }
+    console.log('total fix: ', total)
+    return twoDimArray;
+  }
+  
+  function coordsToTwoDim(element, _w, _h) {
+    var y=element.coords[0][0];
+    var x=element.coords[0][1];
+    var h = element.coords[1][0];
+    var w = element.coords[1][1];
+    var arrayTwoDim = [];
+    for (_y=0; _y<_h; _y++) {
+      var row=[];
+      for (_x=0; _x<_w; _x++) {
+        row.push(0);
+      }
+      arrayTwoDim.push(row);
+    }
+    for (i=0; i<element.data.length; i++) {
+      var _x_ = element.data[i][1];
+      var _y_ = element.data[i][0];
+      arrayTwoDim[_y_][_x_] = 1;
+    }
+    
+    return arrayTwoDim;
+  }
+  
+  function twoDimToCoords(matrix, element) {
+    var coordsArray = [];
+    var starty=element.coords[0][0];
+    var startx=element.coords[0][1];
+    var endy = element.coords[1][0];
+    var endx = element.coords[1][1];
+    
+    for (y = 0; y < matrix.length; y += 1) {
+      for (x = 0; x < matrix[y].length; x += 1) {
+        if (matrix[y][x]==1) {
+          coordsArray.push([y+starty, x+startx])
+        }
+      }
+    }
+  };
+  
+  function biggestCountur(array) {
+    var _c = 0;
+    var big;
+    _.each(array, function(element, index, list){
+      if (element.data && element.data.length>_c) {
+        _c = element.data.length
+        big = element;
+      }
+    })
+    var sign = {
+      sign: big,
+    };
+    biggestCounturDetail(sign, array);
+    return sign;
+  }
+  
+  function biggestCounturDetail(big, counturs) {
+    _.each(counturs, function(element, index, list){
+      var intersection = _.intersection(big.sign.data, element.data);
+      console.log(intersection, element.data)
+      if (intersection == element.data) {
+        console.log('YES!')
+      } else {
+        console.log('NO!')
+      }
+    });
+  }
+  
+  function floodFill(element, x, y, _w, _h) {
+    var matrix = coordsToTwoDim(element.data, _w, _h);
+    if (matrix[y][x]!=0) {
+      return matrix//нужно конвертировать в координаты
+    } else {
+      try {
+        matrix[y][x]=1;        
+      } catch(e) {
+        console.log(e);
+      }
+      floodFill(element, x-1, y, _w, _h)
+      floodFill(element, x+1, y, _w, _h)
+      floodFill(element, x, y+1, _w, _h)
+      floodFill(element, x, y-1, _w, _h)
+    };
+  };
+  
+  function floodFillController(element, _w, _h) {
+    var starty=element.coords[0][0];
+    var startx=element.coords[0][1];
+    var endy = element.coords[1][0];
+    var endx = element.coords[1][1];
+    var randomy = getRandomInt(starty, endy)
+    var randomx = getRandomInt(startx, endx)
+    
+    var flooded = floodFill(element, randomy, randomx, _w, _h);
+    
+    if (flooded.data == element.data) {
+      floodFillController(element, _w, _h)
+    } else {
+      return flooded;
+    }
+    
+    /*for (_y=0; _y<matrix.length; _y++) {
+      for (_x=0; _x<matrix.length; _x++){
+        
+      }
+    }*/
+  }
+  
   $('.step-3 a.clear').click(function(e){
     e.preventDefault();
     croquis.clearLayer();
@@ -200,11 +267,43 @@ $(document).ready(function(){
     var _w = croquis.getLayerImageDataCache().width;
     var _h = croquis.getLayerImageDataCache().height;
     var twoDimArray = make2dimArray(getRawMonochrome(rawImage), _w, _h);
-    
+    console
     //console.log(createImage(make1dimArray(make2dimArray(getRawMonochrome(rawImage), _w, _h)), _w, _h));
     
-    console.log(findShape(make2dimArray(getRawMonochrome(rawImage), _w, _h)))
+    //console.log(findShape(make2dimArray(getRawMonochrome(rawImage), _w, _h)))
+    //console.log(twoDimArray)
+    //twoDimArray = prepare(twoDimArray);
+    console.log('before', createImage(make1dimArray(twoDimArray), _w, _h));
+    twoDimArray = prepare(twoDimArray);
+    twoDimArray = prepare(twoDimArray);
+    twoDimArray = prepare(twoDimArray);
+    twoDimArray = prepare(twoDimArray);
+    twoDimArray = prepare(twoDimArray);
+    twoDimArray = prepare(twoDimArray);
+    console.log('after', createImage(make1dimArray(twoDimArray), _w, _h));
+    counturs = [];
+    shapes = [];
+    counturs = findShapes(twoDimArray, counturs);
     
+    
+    
+    //var bigCountur = biggestCountur(counturs);
+    console.log(counturs);
+    //console.log(bigCountur);
+    
+    var sign = {
+      coords: [],
+      data: [],
+    }
+    _.each(counturs, function(element, index, list){
+      var y=element.coords[0][0]-1;
+      var x=element.coords[0][1]-1;
+      var h = element.coords[1][0]-y+1;
+      var w = element.coords[1][1]-x+1;
+      console.log('countur!!!', createImage(make1dimArray(coordsToTwoDim(element, _w, _h)), _w, _h));
+      croquis.fillLayerRect('rgba('+(Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256))+', 0.5)', x, y, w, h);
+    });
+    //console.log(_.max(shapes));
   });
   
   $('.step-1 a.start').click(function(e){
