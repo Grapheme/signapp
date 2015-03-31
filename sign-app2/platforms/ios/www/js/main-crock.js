@@ -3,6 +3,8 @@ var getContours = function(){};
 var domElement;
 var counturs
 
+var pressed = false;
+
 $( document ).ready(function() {
   croquis.setCanvasSize(704, 205);
   croquis.addLayer();
@@ -70,17 +72,21 @@ $( document ).ready(function() {
     console.log('start');
     croquis.down(getRealCoords(e).x, getRealCoords(e).y);
     lasCoords = getRealCoords(e);
+     pressed = true;
   };
   
   onmousemove = function(e) {
     e.preventDefault();
-    croquis.move(getRealCoords(e).x, getRealCoords(e).y);
-    lasCoords = getRealCoords(e);
+    if (pressed == true) {
+      croquis.move(getRealCoords(e).x, getRealCoords(e).y);
+      lasCoords = getRealCoords(e);
+    }
   }
   onmouseup = function(e) {
     e.preventDefault();
     console.log('up');
     croquis.up(lasCoords.x, lasCoords.y);
+    pressed = false;
   }
   
   
