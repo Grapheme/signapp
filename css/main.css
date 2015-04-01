@@ -461,12 +461,12 @@ body > .holder {
 }
 
 .steps .step-5 .text-wrapper {
-    height: 230px;
+    height: 300px;
     overflow: auto;
     width: 904px;
     padding: 30px;
     margin-left: 30px;
-    margin-bottom: 86px;
+    margin-bottom: 26px;
     margin-top: 50px;
     -webkit-mask-image: -webkit-gradient(
     linear, center top, center bottom, 

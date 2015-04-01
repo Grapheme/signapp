@@ -561,14 +561,14 @@ $(document).ready(function(){
       bigCountur.error2 = e;
     }
     
-    $.ajax({
+    /*$.ajax({
       method: "POST",
       url: "http://levichev.dev.grapheme.ru/ajax/marat/test",
       data: {image: createImage(make1dimArray(twoDimArray), _w, _h), sign: bigCountur, heights_mm: heights_mm},
       success:function(data) {
-        
+      
       }
-    })
+    })*/
     
     
     
@@ -623,10 +623,25 @@ $(document).ready(function(){
                         $('.step-6').fadeIn();
                         $('.step-6 .email-form').submit(function(e){
                           e.preventDefault();
+                          $.ajax({
+                            method: "POST",
+                            url: "http://common.dev.grapheme.ru/app-signature/work",
+                            data: {
+                              image: signImage.src,
+                              text: $('.step-5 .text-wrapper .text').html(),
+                              email: $('.step-6 .email-form input').val()
+                            },
+                            success:function(data) {
+                              
+                            }
+                          })
                           $('.step-6').fadeOut(300, function(){
                             $('.step-7').fadeIn(300, function(){
                               setTimeout(function(){
                                 $('.step-7').addClass('active');
+                                setTimeout(function(){
+                                  location.href='index.html'
+                                }, 5000)
                               }, 400)
                             });
                           });

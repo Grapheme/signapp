@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		1881723995054D6C9CC9CEA4 /* CDVWebViewUIDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5903B69F6D8F4C929E179387 /* CDVWebViewUIDelegate.m */; };
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
@@ -470,7 +469,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Sign-App";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -503,7 +502,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "Sign-App";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
