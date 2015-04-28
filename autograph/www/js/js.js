@@ -446,36 +446,36 @@ $(document).ready(function(){
 
     if (bigCountur.sign.is_long) {
       _RESULT_.text.push('Вы обладаете <strong>стратегическими способностями, а  обстоятельность, усидчивость, настойчивость</strong> позволяют реализовывать многогранные бизнес-проекты.');
-      _RESULT_.html_text.push('<strong>Стратегические способности,  обстоятельность, усидчивость, настойчивость</strong>');
+      _RESULT_.html_text.push('Стратегические способности, обстоятельность, усидчивость, настойчивость');
     } else {
       _RESULT_.text.push('Вы обладаете <strong>тактическими навыками и способностью быстро принимать  решения</strong>, что помогает реализовывать новые  бизнес-идеи.');
-      _RESULT_.html_text.push('<strong>Быстрое принятие  решений</strong>');
+      _RESULT_.html_text.push('Быстрое принятие  решений');
     }
     
     var bigCharHeight = 0;
     
     if (bigCharHeight>=4) {
       _RESULT_.text.push('В обществе <strong>Вы проявляете повышенные требования к окружающим и избирательность</strong>. Благодаря такому амбициозному подходу, Вы добиваетесь поставленных целей.');
-      _RESULT_.html_text.push('<strong>Повышенные требования к окружающим и избирательность.</strong>');
+      _RESULT_.html_text.push('Повышенные требования к окружающим и избирательность');
     } else {
       _RESULT_.text.push('В обществе <strong>Вы утонченный интеллектуал, проявляете сдержанность, действуете осмысленно</strong> и получаете нужную информацию в общении.');
-      _RESULT_.html_text.push('Интеллигентность,  утонченность натуры.');
+      _RESULT_.html_text.push('Интеллигентность, утонченность натуры.');
     }
     
     if (bigCountur.sign.is_small) {
       _RESULT_.text.push('В почерке находит отражение <strong>Ваша способность к поиску точных решений</strong>.')
-      _RESULT_.html_text.push('<strong>Способность к поиску точных решений.</strong>');
+      _RESULT_.html_text.push('Способность к поиску точных решений');
     } else {
       _RESULT_.text.push('В почерке находит отражение <strong>Ваша способность убеждать</strong>.');
-      _RESULT_.html_text.push('<strong>Способность убеждать</strong>');
+      _RESULT_.html_text.push('Способность убеждать');
     }
     
     if (bigCountur.sign.swing == 'min') {
       _RESULT_.text.push('<strong>В личной жизни Вы цените постоянство.</strong>')
-      _RESULT_.html_text.push('<strong>Постоянство в личной жизни</strong>')
+      _RESULT_.html_text.push('Постоянство в личной жизни')
     } else {
       _RESULT_.text.push('<strong>В личной жизни Вы проявляете энтузиазм и инициативность. </strong>');
-      _RESULT_.html_text.push('<strong>Энтузиазм и инициативность в личных вопросах</strong>')
+      _RESULT_.html_text.push('Энтузиазм и инициативность в личных вопросах')
     }
     
     var angle_char = _.random(2);
@@ -496,7 +496,7 @@ $(document).ready(function(){
       _RESULT_.html_text.push('Активность и коммуникабельность');
     } else if (angle_char==1) {
       _RESULT_.text.push('Широкий круг Ваших интересов позволяет посещать как творческие мероприятия, так и  проводить время в уютных ресторанах,  на закрытых вечеринках.');
-      _RESULT_.html_text.push('Творческая натура,  предпочтение закрытым мероприятиям');
+      _RESULT_.html_text.push('Творческая натура, предпочтение закрытым мероприятиям');
     } else {
       _RESULT_.text.push('Широкий круг Ваших увлечений позволяет посещать светские мероприятия, на которых Ваша эмоциональная и яркая натура чувствует себя свободно. ');
       _RESULT_.html_text.push('Эмоциональное  восприятие событий');
@@ -527,13 +527,13 @@ $(document).ready(function(){
     var direction = _.random(2);
     if (direction==0) {
       _RESULT_.text.unshift('Уникальная деталь Вашего характера — <strong>наличие творческого потенциала</strong>. В  подписи также проявляются черты, свойственные  амбициозным и энергичным  людям.');
-      _RESULT_.html_text.unshift('<strong>Наличие творческого потенциала</strong>');
+      _RESULT_.html_text.unshift('Наличие творческого потенциала');
       //_RESULT_.text.unshift('Вы творческая личность.');
       _RESULT_.main = 'Творческая личность';
     }
     if (direction==1) {
       _RESULT_.text.unshift('Уникальная деталь Вашего характера – <strong>реалистичный взгляд на окружающий мир</strong>. В подписи также проявляются черты, свойственные людям, способным быстро ориентироваться в ситуации.');      
-      _RESULT_.html_text.unshift('<strong>Реалистичный взгляд на окружающий мир</strong>');
+      _RESULT_.html_text.unshift('Реалистичный взгляд на окружающий мир');
       _RESULT_.main = 'Реалист';
 
     }
@@ -546,17 +546,17 @@ $(document).ready(function(){
     
     if (heights_mm&&heights_mm[0]>avg_mm && heights_mm[1]>avg_mm && heights_mm[2]>avg_mm&&heights_mm[3]>avg_mm) {
       _RESULT_.text.push('Также в профессиональной деятельности Вам легко генерировать идеи и планировать их реализацию. <strong>Вы отдаете предпочтение умственному труду</strong>.')
-      _RESULT_.html_text.push('<strong>Способность генерировать идеи<strong>');
+      _RESULT_.html_text.push('Способность генерировать идеи');
       
       bigCharHeight = _.max([heights_mm[0],heights_mm[1],heights_mm[2],heights_mm[3]])
     } else if (heights_mm&&heights_mm[heights_mm.length-1]>avg_mm || heights_mm[heights_mm.length-2]>avg_mm) {
       _RESULT_.text.push('Также в профессиональной деятельности <strong>Вам свойственно практическое воплощение идей</strong>.')
-      _RESULT_.html_text.push('<strong>Практическое воплощение идей</strong>')
+      _RESULT_.html_text.push('Практическое воплощение идей')
       bigCharHeight = _.max([heights_mm[heights_mm.length-1],heights_mm[heights_mm.length-2]])
     } else {
       console.log('заглавные в начале (0-1)');
       _RESULT_.text.push('Также в профессиональной деятельности <strong>верное решение Вам помогает принять жизненный опыт</strong>.')
-      _RESULT_.html_text.push('<strong>Способность реализовывать идеи</strong>')
+      _RESULT_.html_text.push('Способность реализовывать идеи')
       bigCharHeight = max_mm;
     }
     
