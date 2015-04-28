@@ -522,7 +522,6 @@ $(document).ready(function(){
     }
     
     shuffle(_RESULT_.text);
-    shuffle(_RESULT_.html_text);
     
     /*
     var direction = _.random(2);
@@ -568,6 +567,8 @@ $(document).ready(function(){
       _RESULT_.html_text.push('Способность реализовывать идеи')
       bigCharHeight = max_mm;
     }
+    
+    shuffle(_RESULT_.html_text);
     
     _RESULT_.text.unshift('Уникальное сочетание деталей в подписи отражает Вашу индивидуальность.');
     _RESULT_.text.unshift(_RESULT_.main);
