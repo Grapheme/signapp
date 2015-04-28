@@ -439,7 +439,7 @@ body > .holder {
 }
 
 .steps .step-5 .text p {
-    text-indent: 34px;
+    /*text-indent: 34px;*/
     display: inline-block;
     width: 100%;
     margin: 12px 0;
