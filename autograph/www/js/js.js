@@ -524,37 +524,46 @@ $(document).ready(function(){
     shuffle(_RESULT_.text);
     shuffle(_RESULT_.html_text);
     
+    /*
     var direction = _.random(2);
     if (direction==0) {
       _RESULT_.text.unshift('Уникальная деталь Вашего характера — <strong>наличие творческого потенциала</strong>. В  подписи также проявляются черты, свойственные  амбициозным и энергичным  людям.');
       _RESULT_.html_text.unshift('Наличие творческого потенциала');
       //_RESULT_.text.unshift('Вы творческая личность.');
-      _RESULT_.main = 'Творческая личность';
     }
     if (direction==1) {
       _RESULT_.text.unshift('Уникальная деталь Вашего характера – <strong>реалистичный взгляд на окружающий мир</strong>. В подписи также проявляются черты, свойственные людям, способным быстро ориентироваться в ситуации.');      
       _RESULT_.html_text.unshift('Реалистичный взгляд на окружающий мир');
-      _RESULT_.main = 'Реалист';
-
     }
     if (direction==2) {
       _RESULT_.text.unshift('Уникальная деталь Вашего характера — рациональный взгляд на жизнь. В подписи также проявляются черты, свойственные уравновешенным и самокритичным людям.');
       _RESULT_.html_text.unshift('Способность ясно мыслить и четко действовать');
-      _RESULT_.main = 'Перфекционист';
       //_RESULT_.text.unshift('Вы рационалист.');
-    }
+    }*/
     
     if (heights_mm&&heights_mm[0]>avg_mm && heights_mm[1]>avg_mm && heights_mm[2]>avg_mm&&heights_mm[3]>avg_mm) {
+      _RESULT_.text.unshift('Уникальная деталь Вашего характера — <strong>наличие творческого потенциала</strong>. В  подписи также проявляются черты, свойственные  амбициозным и энергичным  людям.');
+      _RESULT_.html_text.unshift('Наличие творческого потенциала');
+      _RESULT_.main = 'Творческая личность';
+      
       _RESULT_.text.push('Также в профессиональной деятельности Вам легко генерировать идеи и планировать их реализацию. <strong>Вы отдаете предпочтение умственному труду</strong>.')
       _RESULT_.html_text.push('Способность генерировать идеи');
       
       bigCharHeight = _.max([heights_mm[0],heights_mm[1],heights_mm[2],heights_mm[3]])
     } else if (heights_mm&&heights_mm[heights_mm.length-1]>avg_mm || heights_mm[heights_mm.length-2]>avg_mm) {
+      _RESULT_.text.unshift('Уникальная деталь Вашего характера – <strong>реалистичный взгляд на окружающий мир</strong>. В подписи также проявляются черты, свойственные людям, способным быстро ориентироваться в ситуации.');      
+      _RESULT_.html_text.unshift('Реалистичный взгляд на окружающий мир');
+      _RESULT_.main = 'Реалист';
+
       _RESULT_.text.push('Также в профессиональной деятельности <strong>Вам свойственно практическое воплощение идей</strong>.')
       _RESULT_.html_text.push('Практическое воплощение идей')
       bigCharHeight = _.max([heights_mm[heights_mm.length-1],heights_mm[heights_mm.length-2]])
     } else {
       console.log('заглавные в начале (0-1)');
+      _RESULT_.text.unshift('Уникальная деталь Вашего характера — рациональный взгляд на жизнь. В подписи также проявляются черты, свойственные уравновешенным и самокритичным людям.');
+      _RESULT_.html_text.unshift('Способность ясно мыслить и четко действовать');
+      _RESULT_.main = 'Перфекционист';
+      
       _RESULT_.text.push('Также в профессиональной деятельности <strong>верное решение Вам помогает принять жизненный опыт</strong>.')
       _RESULT_.html_text.push('Способность реализовывать идеи')
       bigCharHeight = max_mm;
